@@ -75,4 +75,9 @@ public class TarifasDTO {
 	public void setFechaModificacion(Date fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
+	
+	@Override
+	public String toString() {
+		return getDescripcion() + " - " + getValor();
+	}
 }

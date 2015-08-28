@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
 @Configuration
@@ -26,13 +25,13 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 		configurer.enable();
 	}
 
-	@Bean
-	public InternalResourceViewResolver jspViewResolver() {
-		InternalResourceViewResolver bean = new InternalResourceViewResolver();
-		bean.setPrefix("/WEB-INF/views/");
-		bean.setSuffix(".html");
-		return bean;
-	}
+//	@Bean //No necesito esto porque Angular lo hace
+//	public InternalResourceViewResolver jspViewResolver() {
+//		InternalResourceViewResolver bean = new InternalResourceViewResolver();
+//		bean.setPrefix("/views/");
+//		bean.setSuffix(".html");
+//		return bean;
+//	}
 
 	@Bean(name = "messageSource")
 	public ReloadableResourceBundleMessageSource getMessageSource() {

@@ -9,30 +9,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sunsoft.hotel.services.TarifasService;
-import com.sunsoft.hotel.services.dto.TarifasDTO;
+import com.sunsoft.hotel.services.CategoriasService;
+import com.sunsoft.hotel.services.dto.CategoriasDTO;
 
 @RestController
-@RequestMapping("/tarifas")
+@RequestMapping("/categorias")
 @Scope("request")
-public class TarifasController {
+public class CategoriasController {
 
     @Autowired
     private DozerBeanMapper mapper;
 
     @Autowired
-    private TarifasService service;
+    private CategoriasService service;
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<TarifasDTO> tarifasList() {
+    public List<CategoriasDTO> list() {
         return service.findAll();
     }
-    
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public void save(TarifasDTO t) {
-    	System.out.println(t.toString());
-    	service.save(t); 
-    }
-}    
-
- 
+}
