@@ -1,60 +1,211 @@
-var appControllers = angular.module('Controllers', [ 'Services', 'angularModalService' ]);
+var appControllers = angular.module('Controllers', [ 'Services' ]);
+	
+appControllers.controller('TarifasListController', function($http, $scope) {
 
-appControllers.controller('TarifasListController', [ '$http', '$scope', 'TarifasService',
-            function($http, $scope, TarifasService) {
+	$http.defaults.headers.post["Content-Type"] = "application/json";
 
-			$scope.description = "Tarifas existentes";
-			
-			$scope.loadData = function() {
-				$scope.buscando = true;
-				TarifasService.query({}, function(data, status) {
-					$scope.codigos = data
-					$scope.buscando = false;
-				});
+	$scope.description = "Tarifas registradas en el sistema";
+
+	$scope.loadData = function() {
+		$scope.buscando = true;
+		$http.get(urlBase + 'tarifas').success(function(data) {
+
+			if (data._embedded != undefined) {
+				$scope.tarifas = data._embedded.tarifas;
+				$scope.buscando = false;
+			} else {
+				$scope.tarifas = [];
 			}
-			
-		} ]);
+		});
+	}
 
-appControllers.controller('EstadosController', [ '$http', '$scope', 'EstadosService', function($http, $scope, EstadosService) {
+});
+
+appControllers.controller('EstadosController', function($http, $scope) {
 	$scope.loadData = function() {
 		$scope.buscando = true;
 		
-		EstadosService.query({}, function(data, status) {
-			$scope.estados = data
-			$scope.buscando = false;
+		$http.get(urlBase + 'estados').success(function(data) {
+
+			if (data._embedded != undefined) {
+				$scope.estados = data._embedded.estados;
+				$scope.buscando = false;
+			} else {
+				$scope.estados = [];
+				$scope.buscando = false;
+			}
 		});
 	}
-}]);
+});
 
-appControllers.controller('CategoriasController', [ '$http', '$scope', 'CategoriasService', function($http, $scope, CategoriasService) {
+appControllers.controller('CategoriasController', function($http, $scope) {
 	$scope.loadData = function() {
 		$scope.buscando = true;
 		
-		CategoriasService.query({}, function(data, status) {
-			$scope.categorias = data
-			$scope.buscando = false;
+		$http.get(urlBase + 'categorias').success(function(data) {
+
+			if (data._embedded != undefined) {
+				$scope.categorias = data._embedded.categorias;
+				$scope.buscando = false;
+			} else {
+				$scope.categorias = [];
+				$scope.buscando = false;
+			}
 		});
 	}
-}]);
+});
 
-appControllers.controller('DepartamentosController', [ '$http', '$scope', 'DepartamentosService', function($http, $scope, DepartamentosService) {
+appControllers.controller('DepartamentosController', function($http, $scope) {
 	$scope.loadData = function() {
 		$scope.buscando = true;
 		
-		DepartamentosService.query({}, function(data, status) {
-			$scope.departamentos = data
-			$scope.buscando = false;
+		$http.get(urlBase + 'rhareas').success(function(data) {
+
+			if (data._embedded != undefined) {
+				$scope.departamentos = data._embedded.rhareas;
+				$scope.buscando = false;
+			} else {
+				$scope.departamentos = [];
+				$scope.buscando = false;
+			}
 		});
 	}
-}]);
+});
 
-appControllers.controller('CargosController', [ '$http', '$scope', 'CargosService', function($http, $scope, CargosService) {
+appControllers.controller('CargosController', function($http, $scope) {
 	$scope.loadData = function() {
 		$scope.buscando = true;
 		
-		CargosService.query({}, function(data, status) {
-			$scope.cargos = data
-			$scope.buscando = false;
+		$http.get(urlBase + 'rhcargos').success(function(data) {
+
+			if (data._embedded != undefined) {
+				$scope.cargos = data._embedded.rhcargos;
+				$scope.buscando = false;
+			} else {
+				$scope.cargos = [];
+				$scope.buscando = false;
+			}
 		});
 	}
-}]);
+});
+
+appControllers.controller('RoomsController', function($http, $scope) {
+	$scope.loadData = function() {
+		$scope.buscando = true;
+		
+		$http.get(urlBase + 'habitaciones').success(function(data) {
+
+			if (data._embedded != undefined) {
+				$scope.rooms = data._embedded.habitaciones;
+				$scope.buscando = false;
+			} else {
+				$scope.rooms = [];
+				$scope.buscando = false;
+			}
+		});
+	}
+});
+
+appControllers.controller('ClientesController', function($http, $scope) {
+	$scope.loadData = function() {
+		$scope.buscando = true;
+		
+		$http.get(urlBase + 'clientes').success(function(data) {
+
+			if (data._embedded != undefined) {
+				$scope.clientes = data._embedded.clientes;
+				$scope.buscando = false;
+			} else {
+				$scope.clientes = [];
+				$scope.buscando = false;
+			}
+		});
+	}
+});
+
+appControllers.controller('indexController', function($http, $scope) {
+
+	$http.get(urlBase + 'info').success(function(data) {
+
+		if (data._embedded != undefined) {
+			$scope.data = data._embedded.info;
+		} else {
+			$scope.data = "";
+		}
+	});
+});
+
+appControllers.controller('DashboardController', function($http, $scope) {
+	$scope.fecha = new Date();
+	$scope.rooms_in_use = 14;
+	$scope.rooms_available = 6;
+	$scope.checkins = 10;
+	$scope.checkouts = 3;
+});
+
+appControllers.controller('InfReservaController', function($http, $scope, $filter, alertService) {
+	
+	//Ini.Control for datepickers
+	$scope.dateFrom = new Date();
+	$scope.dateTo = new Date();
+	
+	$scope.dateOptions = {
+		formatYear : 'yy',
+		startingDay : 1
+	};
+	
+	$scope.formats = [ 'dd-MMMM-yyyy', 'yyyy-MM-dd' ];
+	$scope.format = $scope.formats[0];
+				
+	$scope.statusCalFrom = {
+		opened : false
+	};
+	
+	$scope.openCalFrom = function($event) {
+		$scope.statusCalFrom.opened = true;
+	};
+	
+	$scope.statusCalTo = {
+		opened : false
+	};
+	
+	$scope.openCalTo = function($event) {
+		$scope.statusCalTo.opened = true;
+	};
+	//Fin.Control for datepickers
+	
+	//Despliega las reservas del dia (implementar con la fecha de hoy)
+	$scope.reservasDeHoy = function() {
+		$http.get(urlBase + 'reservas').success(function(data) {
+
+			if (data._embedded != undefined) {
+				$scope.reservas = data._embedded.reservas;
+				$scope.buscando = false;
+			} else {
+				$scope.reservas = [];
+				$scope.buscando = false;
+			}
+		});
+	};
+	
+	$scope.findByfilter = function() {
+		var from = $filter('date')(new Date($scope.dateFrom), $scope.formats[1]);
+		var to = $filter('date')(new Date($scope.dateTo), $scope.formats[1]);
+		
+		$http.get(urlBase + 'reservas/search/findByDateRange?dateFrom=' + from + '&dateTo=' + to).success(function(data) {
+
+			if (data._embedded != undefined) {
+				$scope.reservas = data._embedded.reservas;
+				$scope.buscando = false;
+				alertService.reset();
+				
+				if($scope.reservas.length <= 0) {
+					alertService.add("error", "No existen datos para la consulta");
+				}
+			} else {
+				$scope.reservas = [];
+				$scope.buscando = false;
+			}
+		});
+	};
+});

@@ -1,9 +1,10 @@
 package com.sunsoft.hotel.jpa.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import com.sunsoft.hotel.jpa.model.Categorias;
+import com.sunsoft.hotel.jpa.model.Category;
 
-public interface CategoriasRepo extends JpaRepository<Categorias, Integer> {
+@RepositoryRestResource(collectionResourceRel = "categorias", path = "categorias")
+public interface CategoriasRepo extends BaseRepository<Category, Integer> {
 
 }

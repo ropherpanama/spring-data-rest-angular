@@ -2,7 +2,7 @@
 
 	<form class="form-inline">
 	  <div class="form-group">
-	    <label for="description"><h4>Mantenimiento de Categorias</h4></label>
+	    <label for="description"><h4>Clientes registrados en el sistema</h4></label>
 	    <input type="text" class="form-control" style="margin-left: 5px" placeholder="Filtrar ..." ng-model="query">
 	  </div>
 	  <button type="submit" class="btn btn-default pull-right" ng-click="loadData()">Buscar</button>
@@ -14,16 +14,22 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th class="col-md-5">Descripcion</th>
-					<th class="col-md-5">Fecha de creacion</th>
+					<th class="col-md-3">Nombre</th>
+					<th class="col-md-3">Direccion</th>
+					<th class="col-md-1">Telefono</th>
+					<th class="col-md-1">Celular</th>
+					<th class="col-md-2">Email</th>
 					<th class="col-md-2">Opciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="item in categorias | filter:query | orderBy:orderProp">
+				<tr ng-repeat="item in clientes | filter:query | orderBy:orderProp">
 					<th scope="row">{{$index + 1}}</th>
-					<td>{{item.descripcion}}</td>
-					<td>{{item.fechaCreacion | date: 'dd-MM-yyyy'}}</td>
+					<td>{{item.nombre}} {{item.apellido1}} {{item.apellido2}}</td>
+					<td>{{item.direccion}}</td>
+					<td>{{item.telefono}}</td>
+					<td>{{item.movil}}</td>
+					<td>{{item.email}}</td>
 					<td>
 						<button class="btn btn-default" ng-click="showDetail(item)">
 							<i class="glyphicon glyphicon-search"></i>

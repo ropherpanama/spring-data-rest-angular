@@ -1,7 +1,9 @@
 package com.sunsoft.hotel.jpa.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.sunsoft.hotel.jpa.model.Tarifas;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface TarifasRepo extends JpaRepository<Tarifas, Integer> {
+import com.sunsoft.hotel.jpa.model.Rate;
+
+@RepositoryRestResource(collectionResourceRel = "tarifas", path = "tarifas")
+public interface TarifasRepo extends BaseRepository<Rate, Integer> {
 }

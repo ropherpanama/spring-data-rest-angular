@@ -1,7 +1,40 @@
 <div class="row">
-	<div class="col-md-3">
-		<h4>Estado del sistema</h4>
+	<div class="row">
+		<div class="col-sm-9">
+			<div class="page-header">
+				<h2>
+					Estado del sistema <small>{{fecha | date:'EEEE d MMMM yyyy'}}</small>
+				</h2>
+			</div>
+		</div>
 	</div>
-	<div class="col-md-12 center-block">
+
+	<div class="row">
+		<div class="col-md-10 col-md-offset-2">
+			<h3>Checkins para hoy <span class="label label-warning">{{checkins}}</span></h3>
+			<a href="">Detalles</a>
+		</div>
 	</div>
+	
+		<div class="row">
+		<div class="col-md-10 col-md-offset-2">
+			<h3>Checkouts para hoy <span class="label label-warning">{{checkouts}}</span></h3>
+			<a href="">Detalles</a>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-10 col-md-offset-2">
+			<h3>Habitaciones ocupadas <span class="label label-warning">{{rooms_in_use}}</span></h3>
+			<a href="">Detalles</a>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-10 col-md-offset-2">
+			<h3>Habitaciones disponibles <span class="label label-warning">{{rooms_available}}</span></h3>
+			<a href="">Detalles</a>
+		</div>
+	</div>
+
 </div>

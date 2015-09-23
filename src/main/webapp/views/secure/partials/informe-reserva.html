@@ -1,0 +1,59 @@
+<div class="row">
+
+	<form class="form-inline">
+	  <div class="form-group">
+	    <label for="description"><h3>Informe de reservas</h3></label>
+	  </div>
+	</form>
+
+	<form class="form-inline" style="margin-bottom: 5px">
+	  <div class="form-group">
+	    <label>Busqueda</label>
+	    <p class="form-group input-group">
+			<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dateFrom" is-open="statusCalFrom.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Cerrar" />
+			<span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="openCalFrom($event)"><i class="glyphicon glyphicon-calendar"></i></button> 
+        	</span>
+        </p>
+	  </div>
+	  <div class="form-group input-group">
+			<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dateTo" is-open="statusCalTo.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Cerrar" />
+		<span class="input-group-btn">
+				<button type="button" class="btn btn-default" ng-click="openCalTo($event)"><i class="glyphicon glyphicon-calendar"></i></button> 
+        </span>
+	  </div>
+	  
+	  <button type="submit" class="btn btn-default" ng-click="findByfilter()" style="margin-left: 5px">Buscar</button>
+	  <button type="submit" class="btn btn-default" ng-click="reservasDeHoy()" style="margin-left: 5px">Hoy</button>
+	  <button type="submit" class="btn btn-success" ng-click="" style="margin-left: 5px">Exportar</button>
+	      
+	</form>
+	
+	<div>
+		<!-- Table -->
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th class="col-md-3">Cliente</th>
+					<th class="col-md-3">Fecha</th>
+					<th class="col-md-1">Adultos</th>
+					<th class="col-md-1">Infantes</th>
+					<th class="col-md-1">Dias</th>
+					<th class="col-md-3">Estado</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in reservas">
+					<th scope="row">{{$index + 1}}</th>
+					<td>{{item.cliente}}</td>
+					<td>{{item.fecha  | date:'EEEE d MMMM yyyy HH:mm:ss a'}}</td>
+					<td>{{item.adultos}}</td>
+					<td>{{item.menores}}</td>
+					<td>{{item.cantDias}}</td>
+					<td>{{item.estado}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

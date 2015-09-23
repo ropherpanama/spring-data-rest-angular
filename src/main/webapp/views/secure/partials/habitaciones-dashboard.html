@@ -1,8 +1,8 @@
 <div class="row">
-
+	
 	<form class="form-inline">
 	  <div class="form-group">
-	    <label for="description"><h4>Mantenimiento de Categorias</h4></label>
+	    <label for="description"><h4>Mantenimiento de Habitaciones</h4></label>
 	    <input type="text" class="form-control" style="margin-left: 5px" placeholder="Filtrar ..." ng-model="query">
 	  </div>
 	  <button type="submit" class="btn btn-default pull-right" ng-click="loadData()">Buscar</button>
@@ -14,16 +14,26 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th class="col-md-5">Descripcion</th>
-					<th class="col-md-5">Fecha de creacion</th>
+					<th class="col-md-1">Habitacion</th>
+					<th class="col-md-1">Nivel</th>
+					<th class="col-md-2">Categoria</th>
+					<th class="col-md-2">Tarifa</th>
+					<th class="col-md-1">Capacidad</th>
+					<th class="col-md-1">Cant. Camas</th>
+					<th class="col-md-2">Estado</th>
 					<th class="col-md-2">Opciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="item in categorias | filter:query | orderBy:orderProp">
+				<tr ng-repeat="item in rooms | filter:query | orderBy:orderProp">
 					<th scope="row">{{$index + 1}}</th>
-					<td>{{item.descripcion}}</td>
-					<td>{{item.fechaCreacion | date: 'dd-MM-yyyy'}}</td>
+					<td>{{item.numero}}</td>
+					<td>{{item.nivel}}</td>
+					<td>{{item.categoria}}</td>
+					<td>{{item.tarifa}}</td>
+					<td>{{item.ocupantes}}</td>
+					<td>{{item.cantidadCamas}}</td>
+					<td>{{item.estado}}</td>
 					<td>
 						<button class="btn btn-default" ng-click="showDetail(item)">
 							<i class="glyphicon glyphicon-search"></i>

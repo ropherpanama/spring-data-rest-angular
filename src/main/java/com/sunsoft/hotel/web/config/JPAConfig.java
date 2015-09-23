@@ -2,9 +2,8 @@ package com.sunsoft.hotel.web.config;
 
 import javax.sql.DataSource;
 
-import org.dozer.DozerBeanMapper;
+//import org.dozer.DozerBeanMapper;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -18,9 +17,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.sunsoft.hotel.config.GeneralConfig;
 
 @Configuration
+@EnableJpaRepositories("com.sunsoft.hotel.jpa.repositories")
 @EnableTransactionManagement
-@ComponentScan("com.sunsoft.hotel.jpa")
-@EnableJpaRepositories("com.sunsoft.hotel.jpa")
 public class JPAConfig {
 
 	@Bean(name = "dataSource")
@@ -58,8 +56,8 @@ public class JPAConfig {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
 
-	@Bean
-	public DozerBeanMapper getMapper() {
-		return new DozerBeanMapper();
-	}
+//	@Bean
+//	public DozerBeanMapper getMapper() {
+//		return new DozerBeanMapper();
+//	}
 }
